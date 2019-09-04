@@ -11,23 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@index');
 
-Route::get('/tasks', function () {
-    $data=App\Task::all();
-    return view('task')->with('task',$data);
-});
+Route::get('/about', 'PagesController@about');
 
-Route::post('/saveTask','taskController@store');
+Route::get('/services', 'PagesController@services');
 
-Route::get('/markascompleted/{id}','taskController@updateTask');
+Route::resource('posts','PostsController');
 
-Route::get('/markasnotcompleted/{id}','taskController@updateTaskAsNotCompleted');
+Auth::routes();
 
-Route::get('/deletetask/{id}','taskController@deleteTask');
-
-Route::get('/updateTask/{id}','taskController@updateTaskContent');
-
-Route::post('/updateTasks','taskController@updatetasks');
+Route::get('/home', 'HomeController@index')->name('home');

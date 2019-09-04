@@ -1,18 +1,19 @@
 @extends('layouts.app')
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{config('app.name', 'lsApp')}} </title>
-
-    </head>
-    <body>
-        <div class="container">
-            <h1>create Posts</h1>
-            
+@section('content')
+    <h1>create Posts</h1>
+    {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        <div class="form-group">
+            {{Form::label('title', 'Title')}}
+            {{Form::text('title','', ['class'=>'form-control', 'placeholder' => 'Title'])}}
         </div>
-        
-    </body>
-</html>
+        <div class="form-group">
+            {{Form::label('body', 'Body')}}
+            {{Form::textarea('body','', ['id'=>'article-ckeditor','class'=>'form-control', 'placeholder' => 'Body text'])}}
+        </div>
+        <div class="form-group">
+            {{Form::file('cover_image')}}
+        </div>
+        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+    {!! Form::close() !!}  
+@endsection
